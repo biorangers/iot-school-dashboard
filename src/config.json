@@ -1,0 +1,83 @@
+{
+  "name": "Name",
+  "schedule": [
+    [
+      {
+        "id": "BM301",
+        "place": "Z04",
+        "name": "Bil. Mühendisliği Giriş",
+        "time": {
+          "start": "13:30",
+          "end": "15:30"
+        }
+      }
+    ],
+    [
+      {
+        "id": "BM401",
+        "place": "Z04",
+        "name": "Veri Madenciliği",
+        "time": {
+          "start": "13:30",
+          "end": "15:30"
+        }
+      }
+    ],
+    [
+      {
+        "id": "BM402",
+        "place": "Z04",
+        "name": "Bil. Ağları",
+        "time": {
+          "start": "13:30",
+          "end": "15:30"
+        }
+      }
+    ],
+    [
+      {
+        "id": "BM403",
+        "place": "Z04",
+        "name": "Bil. Grafikleri",
+        "time": {
+          "start": "13:30",
+          "end": "15:30"
+        }
+      }
+    ],
+    [
+      {
+        "id": "BM404",
+        "place": "Z04",
+        "name": "Bil. Güvenliği",
+        "time": {
+          "start": "13:30",
+          "end": "15:30"
+        }
+      }
+    ],
+    [
+      {
+        "id": "BM405",
+        "place": "Z04",
+        "name": "Bil. Mühendisliği Proje",
+        "time": {
+          "start": "13:30",
+          "end": "15:30"
+        }
+      }
+    ],
+    [
+      {
+        "id": "BM406",
+        "place": "Z04",
+        "name": "Bil. Mühendisliği Seminer",
+        "time": {
+          "start": "13:30",
+          "end": "15:30"
+        }
+      }
+    ]
+  ],
+  "homeworks": [{}]
+}
