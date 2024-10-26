@@ -23,10 +23,10 @@ export default function Home() {
         alignItems: "center",
       }}
     >
-      <Box sx={{ width: "100%", height: "100%", padding: "2px" }}>
+      <Box sx={{ width: "100%", height: "100%", padding: "16px" }}>
         <Grid container spacing={2}>
           {/* Top Row: 2x1 2x1 */}
-          <Grid size={6}>
+          <Grid size={6} className="min-h-24">
             <HeroCard />
           </Grid>
           <Grid size={6}>
@@ -34,7 +34,7 @@ export default function Home() {
           </Grid>
 
           {/* Middle Row: 1x2 2x2 1x2 */}
-          <Grid size={4}>
+          <Grid size={4} className="min-h-52">
             <HomeworkCard />
           </Grid>
           <Grid size={4}>
@@ -45,7 +45,7 @@ export default function Home() {
           </Grid>
 
           {/* Bottom Row: 2x1 2x1 */}
-          <Grid size={6}>
+          <Grid size={6} className="min-h-24">
             <PomodoroCard />
           </Grid>
           <Grid size={6}>
