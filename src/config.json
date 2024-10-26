@@ -79,7 +79,18 @@
       }
     ]
   ],
-  "homeworks": [{}],
+  "homeworks": [
+    {
+      "id": "1",
+      "name": "Nesnelerin İnterneti",
+      "deadline": "11/11/2024"
+    },
+    {
+      "id": "2",
+      "name": "Veri Madenciliği",
+      "deadline": "02/01/2025"
+    }
+  ],
   "radios": [
     {
       "name": "Lofi Beats - Study",

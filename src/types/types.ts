@@ -8,6 +8,12 @@ export type Schedule = {
   };
 };
 
+export type Homework = {
+  id: string;
+  name: string;
+  deadline: string;
+};
+
 export type Radio = {
   name: string;
   url: string;

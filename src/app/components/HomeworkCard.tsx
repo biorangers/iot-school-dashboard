@@ -1,6 +1,17 @@
 import { Paper, Typography } from "@mui/material";
 
+import config from "@/config.json";
+
+import dayjs from "dayjs";
+import "dayjs/locale/tr";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
 export default function HomeworkCard() {
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
+  dayjs.locale("tr");
+
   return (
     <Paper
       sx={{
@@ -11,8 +22,12 @@ export default function HomeworkCard() {
       }}
     >
       <Typography variant="h6">Ödevler</Typography>
-      <Typography variant="body2">Nesnelerin İnt. - 24 Ekim</Typography>
-      <Typography variant="body2">Tasarım Uyg. - 25 Kasım</Typography>
+      {(config.homeworks.length > 0 &&
+        config.homeworks.map((item) => (
+          <Typography variant="body2" key={item.id}>
+            {item.name} - {dayjs(item.deadline).format("DD MMMM")}
+          </Typography>
+        ))) || <Typography variant="body2">Ödev yok</Typography>}
     </Paper>
   );
 }
