@@ -8,7 +8,13 @@ export type Schedule = {
   };
 };
 
+export type Radio = {
+  name: string;
+  url: string;
+};
+
 export type Config = {
   name: string;
   schedule: Schedule[];
+  radios: Radio[];
 };

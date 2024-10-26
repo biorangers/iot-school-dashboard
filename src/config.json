@@ -79,5 +79,11 @@
       }
     ]
   ],
-  "homeworks": [{}]
+  "homeworks": [{}],
+  "radios": [
+    {
+      "name": "Lofi Beats - Study",
+      "url": "https://play.streamafrica.net/lofiradio"
+    }
+  ]
 }
