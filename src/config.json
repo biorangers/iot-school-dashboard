@@ -93,8 +93,44 @@
   ],
   "radios": [
     {
-      "name": "Lofi Beats - Study",
+      "name": "Lofi Girl",
       "url": "https://play.streamafrica.net/lofiradio"
+    },
+    {
+      "name": "Chillhop",
+      "url": "http://stream.zeno.fm/fyn8eh3h5f8uv"
+    },
+    {
+      "name": "Box Lofi",
+      "url": "http://stream.zeno.fm/f3wvbbqmdg8uv"
+    },
+    {
+      "name": "The Bootleg Boy",
+      "url": "http://stream.zeno.fm/0r0xa792kwzuv"
+    },
+    {
+      "name": "Radio Spinner",
+      "url": "https://live.radiospinner.com/lofi-hip-hop-64"
+    },
+    {
+      "name": "SmoothChill",
+      "url": "https://media-ssl.musicradio.com/SmoothChill"
+    },
+    {
+      "name": "Radio Record Lo-Fi",
+      "url": "https://radiorecord.hostingradio.ru/lofi96.aacp"
+    },
+    {
+      "name": "Rainwave (Chiptune)",
+      "url": "https://rainwave.cc/tune_in/4.ogg.m3u"
+    },
+    {
+      "name": "Baroque",
+      "url": "https://strm112.1.fm/baroque_mobile_mp3?aw_0_req.gdpr=true"
+    },
+    {
+      "name": "Kohina",
+      "url": "https://kohina.duckdns.org/icecast/stream.ogg"
     }
   ]
 }
