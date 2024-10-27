@@ -9,6 +9,7 @@ import ScheduleCard from "./components/ScheduleCard";
 import MusicCard from "./components/MusicCard";
 import HomeworkCard from "./components/HomeworkCard";
 import AnnouncementCard from "./components/AnnouncementCard";
+import VoiceAssistant from "./components/VoiceAssistant";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
         alignItems: "center",
       }}
     >
+      <VoiceAssistant />
       <Box sx={{ width: "100%", height: "100%", padding: "16px" }}>
         <Grid container spacing={2}>
           {/* Top Row: 2x1 2x1 */}
