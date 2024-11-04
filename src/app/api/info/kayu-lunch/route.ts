@@ -11,7 +11,12 @@ export async function GET(request: Request) {
   }
   const siteText = await site.text();
   const $ = load(siteText);
-  const result = [];
+  interface Dish {
+    dayTitle: string;
+    content: string[];
+  }
+
+  const result: Dish[] = [];
 
   $(
     "body > div.content-top > div.container > div > div > div.col-lg-9.mb-4 > table > tbody > tr > td > *"
@@ -24,7 +29,7 @@ export async function GET(request: Request) {
   $(
     "body > div.content-top > div.container > div > div > div.col-lg-9.mb-4 > table > tbody > tr > td > ul"
   ).each((index, ulElement) => {
-    const content = [];
+    const content: string[] = [];
 
     // Boş öğeleri atlayın
     const previousElement = $(ulElement).prev();
