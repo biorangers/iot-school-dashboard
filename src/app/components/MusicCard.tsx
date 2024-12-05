@@ -17,11 +17,15 @@ import {
 export default function MusicCard() {
   const [playing, setPlaying] = useState(false);
   const [radio, setRadio] = useState(config.radios[0]);
-  const [audio] = useState(() => new Audio(config.radios[0].url)); // Initialize audio once
+  const [audio, setAudio] = useState(() => null as unknown as HTMLAudioElement);
   const [volume, setVolume] = useState(50);
 
   useEffect(() => {
-    audio.volume = volume / 100; // Set initial volume
+    if (typeof window !== "undefined") {
+      const newAudio = new Audio(config.radios[0].url);
+      newAudio.volume = volume / 100;
+      setAudio(newAudio);
+    }
   }, [audio, volume]);
 
   function handleChange(event: Event, newValue: number | number[]) {
