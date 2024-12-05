@@ -17,25 +17,37 @@ import {
 export default function MusicCard() {
   const [playing, setPlaying] = useState(false);
   const [radio, setRadio] = useState(config.radios[0]);
-  const [audio, setAudio] = useState(() => null as unknown as HTMLAudioElement);
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
   const [volume, setVolume] = useState(50);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && !audio) {
       const newAudio = new Audio(config.radios[0].url);
       newAudio.volume = volume / 100;
       setAudio(newAudio);
+
+      return () => {
+        newAudio.pause();
+        newAudio.src = ""; // Hafıza sızıntısını önlemek için
+      };
     }
-  }, [audio, volume]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (audio) {
+      audio.volume = volume / 100;
+    }
+  }, [volume, audio]);
 
   function handleChange(event: Event, newValue: number | number[]) {
     const newVolume = newValue as number;
     setVolume(newVolume);
-    audio.volume = newVolume / 100; // Adjust volume directly
+    audio!.volume = newVolume / 100; // Adjust volume directly
   }
 
   function changeRadio(direction: "next" | "previous") {
-    audio.pause();
+    audio!.pause();
 
     let newRadio;
     if (direction === "next") {
@@ -52,20 +64,20 @@ export default function MusicCard() {
           : config.radios[config.radios.length - 1];
     }
 
-    audio.src = newRadio.url; // Update audio source
+    audio!.src = newRadio.url; // Update audio source
     setRadio(newRadio);
 
-    audio.play();
+    audio!.play();
     setPlaying(true);
   }
 
   function play() {
     if (playing) {
       setPlaying(false);
-      audio.pause();
+      audio!.pause();
     } else {
       setPlaying(true);
-      audio.play();
+      audio!.play();
     }
   }
 
