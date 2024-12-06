@@ -28,9 +28,11 @@ export default function VoiceAssistant() {
       const transcript =
         event.results[event.results.length - 1][0].transcript.trim();
       console.log("Heard: ", transcript);
+      speak("Hello, I'm your voice assistant. How can I help you today?");
       if (transcript.toLowerCase().startsWith("asistan")) {
         // pop "asistan" from the string
         const command = transcript.slice(8).trim().toLowerCase();
+
         console.log("Command: ", command);
         setMessage(command);
         if (command === "müzik çal") {
@@ -42,6 +44,10 @@ export default function VoiceAssistant() {
     // Hataları yakala
     recognition.onerror = (event) => {
       console.error("Speech recognition error:", event.error);
+      if (event.error === "no-speech") {
+        recognition.stop();
+        recognition.start();
+      }
     };
 
     // Tanımayı başlat
@@ -52,9 +58,20 @@ export default function VoiceAssistant() {
       recognition.stop();
     };
   }, []);
-
+  const speak = (text: string) => {
+    const SpeechSynthesisUtterance = window.SpeechSynthesisUtterance;
+    if (SpeechSynthesisUtterance) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "tr-TR";
+      console.log(utterance);
+      window.speechSynthesis.speak(utterance);
+    } else {
+      alert("Tarayıcı konuşma sentezini desteklemiyor.");
+    }
+  };
   const playLofi = () => {
     // Örneğin bir ses oynatıcıyı çalıştır
+
     const audio = new Audio("https://play.streamafrica.net/lofiradio");
     audio.play();
   };
