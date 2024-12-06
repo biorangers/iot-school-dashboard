@@ -2,9 +2,11 @@ import { load } from "cheerio";
 import { NextResponse } from "next/server";
 
 // To handle a GET request to /api
-export async function GET(request: Request) {
+export async function GET() {
   const url = `https://sksd.kayseri.edu.tr/tr/i/1-2/yemek-listesi`;
-  const site = await fetch(url);
+  const site = await fetch(url, {
+    cache: "no-store",
+  });
   if (site.status !== 200) {
     // logger.log(client, "error", `Kayseri Üni. yemekhane sayfasına ulaşılamadı.`);
     return null;
@@ -48,7 +50,16 @@ export async function GET(request: Request) {
             .replace(/\( +/g, "(")
             .replace(/ +/g, " ");
 
-          const dish = liTextData.split("(")[0].trim();
+          // make first letters big and the rest small
+          // const dish = liTextData.split("(")[0].trim()
+
+          const dish = liTextData
+            .split(" ")
+            .map((word) => {
+              return word.charAt(0) + word.slice(1).toLocaleLowerCase("tr-TR");
+            })
+            .join(" ")
+            .trim();
 
           content.push(dish);
         });
