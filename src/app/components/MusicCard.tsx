@@ -1,9 +1,14 @@
 "use client";
 
-import { Paper, Typography, IconButton, Slider, Stack } from "@mui/material";
+import {
+  Paper,
+  Typography,
+  IconButton,
+  Slider,
+  Stack,
+  Skeleton,
+} from "@mui/material";
 import { useState, useEffect } from "react";
-
-import config from "@/config.json";
 
 import {
   Pause,
@@ -14,15 +19,29 @@ import {
   VolumeUp,
 } from "@mui/icons-material";
 
-export default function MusicCard() {
+import { Radio } from "@/types/types";
+
+export default function MusicCard({
+  radios,
+  loading,
+}: {
+  radios: Radio[];
+  loading: boolean;
+}) {
   const [playing, setPlaying] = useState(false);
-  const [radio, setRadio] = useState(config.radios[0]);
+  const [radio, setRadio] = useState(radios[0]);
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
   const [volume, setVolume] = useState(50);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && !audio) {
-      const newAudio = new Audio(config.radios[0].url);
+    if (!loading && radios.length > 0 && !radio) {
+      setRadio(radios[0]);
+    }
+  }, [loading, radios, radio]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && !audio && !loading) {
+      const newAudio = new Audio(radios[0].url);
       newAudio.volume = volume / 100;
       setAudio(newAudio);
 
@@ -32,7 +51,7 @@ export default function MusicCard() {
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [loading]);
 
   useEffect(() => {
     if (audio) {
@@ -51,17 +70,15 @@ export default function MusicCard() {
 
     let newRadio;
     if (direction === "next") {
-      const nextRadioIndex = config.radios.indexOf(radio) + 1;
+      const nextRadioIndex = radios.indexOf(radio) + 1;
       newRadio =
-        nextRadioIndex < config.radios.length
-          ? config.radios[nextRadioIndex]
-          : config.radios[0];
+        nextRadioIndex < radios.length ? radios[nextRadioIndex] : radios[0];
     } else {
-      const previousRadioIndex = config.radios.indexOf(radio) - 1;
+      const previousRadioIndex = radios.indexOf(radio) - 1;
       newRadio =
         previousRadioIndex >= 0
-          ? config.radios[previousRadioIndex]
-          : config.radios[config.radios.length - 1];
+          ? radios[previousRadioIndex]
+          : radios[radios.length - 1];
     }
 
     audio!.src = newRadio.url; // Update audio source
@@ -90,33 +107,42 @@ export default function MusicCard() {
         height: "100%",
       }}
     >
-      <Typography variant="h6">{radio.name}</Typography>
-      <div className="flex justify-between items-center max-h-8">
-        <IconButton onClick={() => changeRadio("previous")}>
-          <SkipPrevious />
-        </IconButton>
-        <IconButton onClick={play}>
-          {playing ? <Pause /> : <PlayArrow />}
-        </IconButton>
-        <IconButton onClick={() => changeRadio("next")}>
-          <SkipNext />
-        </IconButton>
-        <Stack
-          spacing={1}
-          direction="row"
-          sx={{ alignItems: "center", width: 200 }}
-        >
-          <VolumeDown />
-          <Slider
-            aria-label="Volume"
-            value={volume}
-            onChange={handleChange}
-            color="info"
-            valueLabelDisplay="auto"
-          />
-          <VolumeUp />
-        </Stack>
-      </div>
+      {loading ? (
+        <div className="flex flex-col gap-0">
+          <Skeleton variant="text" width={100} height={20} />
+          <Skeleton variant="text" width={200} height={30} />
+        </div>
+      ) : (
+        <div>
+          <Typography variant="h6">{radio?.name}</Typography>
+          <div className="flex justify-between items-center max-h-8">
+            <IconButton onClick={() => changeRadio("previous")}>
+              <SkipPrevious />
+            </IconButton>
+            <IconButton onClick={play}>
+              {playing ? <Pause /> : <PlayArrow />}
+            </IconButton>
+            <IconButton onClick={() => changeRadio("next")}>
+              <SkipNext />
+            </IconButton>
+            <Stack
+              spacing={1}
+              direction="row"
+              sx={{ alignItems: "center", width: 200 }}
+            >
+              <VolumeDown />
+              <Slider
+                aria-label="Volume"
+                value={volume}
+                onChange={handleChange}
+                color="info"
+                valueLabelDisplay="auto"
+              />
+              <VolumeUp />
+            </Stack>
+          </div>
+        </div>
+      )}
     </Paper>
   );
 }

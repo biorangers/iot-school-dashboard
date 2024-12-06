@@ -28,32 +28,40 @@ export default function PomodoroCard() {
   const [timeLeft, setTimeLeft] = useState(pomodoroDuration);
   const [isRunning, setIsRunning] = useState(false);
   const [onBreak, setOnBreak] = useState(false);
-  const bellSound = typeof Audio !== "undefined" ? new Audio("/bell.mp3") : null; // Ses dosyası
 
   useEffect(() => {
     if (isRunning && timeLeft > 0) {
-      const interval = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
-      return () => clearInterval(interval);
-    } else if (timeLeft === 0) {
-      if (bellSound) {
-        bellSound.play();
-      }
-      if (onBreak) {
-        setOnBreak(false);
-        setTimeLeft(pomodoroDuration);
-        setIsRunning(false);
-      } else {
-        setOnBreak(true);
-        setTimeLeft(breakDuration);
-        setIsRunning(true);
+      const bellSound =
+        typeof Audio !== "undefined" ? new Audio("/bell.mp3") : null; // Ses dosyası
+
+      if (isRunning && timeLeft > 0) {
+        const interval = setInterval(
+          () => setTimeLeft((prev) => prev - 1),
+          1000
+        );
+        return () => clearInterval(interval);
+      } else if (timeLeft === 0) {
+        if (bellSound) {
+          bellSound.play();
+        }
+        if (onBreak) {
+          setOnBreak(false);
+          setTimeLeft(pomodoroDuration);
+          setIsRunning(false);
+        } else {
+          setOnBreak(true);
+          setTimeLeft(breakDuration);
+          setIsRunning(true);
+        }
       }
     }
-  }, [isRunning, timeLeft, onBreak, bellSound]);
-
+  }, [isRunning, timeLeft, onBreak]);
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${minutes < 10 ? "0" : ""}${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+    return `${minutes < 10 ? "0" : ""}${minutes}:${
+      secs < 10 ? "0" : ""
+    }${secs}`;
   };
 
   const handleStartPause = () => {
@@ -66,7 +74,8 @@ export default function PomodoroCard() {
     setTimeLeft(pomodoroDuration);
   };
 
-  const circleProgress = (1 - timeLeft / (onBreak ? breakDuration : pomodoroDuration)) * 100;
+  const circleProgress =
+    (1 - timeLeft / (onBreak ? breakDuration : pomodoroDuration)) * 100;
 
   return (
     <Paper
@@ -95,7 +104,12 @@ export default function PomodoroCard() {
         </Stack>
 
         {/* Sağ Taraf: Çember şeklinde sayaç */}
-        <Box position="relative" display="flex" alignItems="center" justifyContent="center">
+        <Box
+          position="relative"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
           <Typography
             variant="body2"
             sx={{

@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
@@ -10,8 +11,27 @@ import MusicCard from "./components/MusicCard";
 import HomeworkCard from "./components/HomeworkCard";
 import AnnouncementCard from "./components/AnnouncementCard";
 import VoiceAssistant from "./components/VoiceAssistant";
+import { Schedule, Homework, Radio, Config } from "@/types/types";
 
 export default function Home() {
+  const [name, setName] = useState<string>("");
+  const [schedule, setSchedule] = useState<Schedule[]>([]);
+  const [homeworks, setHomeworks] = useState<Homework[]>([]);
+  const [radios, setRadios] = useState<Radio[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    fetch("/api/database?key=1")
+      .then((res) => res.json())
+      .then((data: Config) => {
+        setName(data.name);
+        setSchedule(data.schedule);
+        setHomeworks(data.homeworks);
+        setRadios(data.radios);
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <Box
       sx={{
@@ -29,7 +49,7 @@ export default function Home() {
         <Grid container spacing={2}>
           {/* Top Row: 2x1 2x1 */}
           <Grid size={6} className="min-h-24">
-            <HeroCard />
+            <HeroCard name={name} loading={loading} />
           </Grid>
           <Grid size={6}>
             <AnnouncementCard />
@@ -37,10 +57,10 @@ export default function Home() {
 
           {/* Middle Row: 1x2 2x2 1x2 */}
           <Grid size={4} className="min-h-52">
-            <HomeworkCard />
+            <HomeworkCard homeworks={homeworks} loading={loading} />
           </Grid>
           <Grid size={4}>
-            <ScheduleCard />
+            <ScheduleCard schedule={schedule} loading={loading} />
           </Grid>
           <Grid size={4}>
             <LunchCard />
@@ -51,7 +71,7 @@ export default function Home() {
             <PomodoroCard />
           </Grid>
           <Grid size={6}>
-            <MusicCard />
+            <MusicCard radios={radios} loading={loading} />
           </Grid>
         </Grid>
       </Box>

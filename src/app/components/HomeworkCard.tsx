@@ -1,13 +1,19 @@
 import { Paper, Typography } from "@mui/material";
 
-import config from "@/config.json";
-
 import dayjs from "dayjs";
 import "dayjs/locale/tr";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import { Homework } from "@/types/types";
+import Loading from "./Loading";
 
-export default function HomeworkCard() {
+export default function HomeworkCard({
+  homeworks,
+  loading,
+}: {
+  homeworks: Homework[];
+  loading: boolean;
+}) {
   dayjs.extend(utc);
   dayjs.extend(timezone);
   dayjs.locale("tr");
@@ -22,12 +28,18 @@ export default function HomeworkCard() {
       }}
     >
       <Typography variant="h6">Ödevler</Typography>
-      {(config.homeworks.length > 0 &&
-        config.homeworks.map((item) => (
-          <Typography variant="body2" key={item.id}>
-            {item.name} - {dayjs(item.deadline).format("DD MMMM")}
+      {loading && <Loading />}
+      {homeworks.length > 0 &&
+        homeworks.map((item: Homework) => (
+          <Typography
+            variant="body2"
+            key={item.id + "homework"}
+            onClick={() => alert(item.description)}
+            sx={{ cursor: "pointer", margin: "4px 0" }}
+          >
+            {item.name} - {item.dueDate}
           </Typography>
-        ))) || <Typography variant="body2">Ödev yok</Typography>}
+        ))}
     </Paper>
   );
 }

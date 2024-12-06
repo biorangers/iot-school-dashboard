@@ -1,7 +1,8 @@
 "use client";
 
-import { List, ListItem, Paper, Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
+import Loading from "./Loading";
 
 export default function LunchCard() {
   const [meals, setMeals] = useState<string[]>([]);
@@ -9,11 +10,13 @@ export default function LunchCard() {
   useEffect(() => {
     const fetchLunchMenu = async () => {
       try {
-        const response = await fetch("/api/info/kayu-lunch");
-        const lunchData = await response.json();
         const date = new Date();
         const isWeekend = date.getDay() === 6 || date.getDay() === 0;
         if (isWeekend) setMeals(["Hafta sonu"]);
+
+        const response = await fetch("/api/info/kayu-lunch");
+        const lunchData = await response.json();
+
         const today = date.getDate().toString().padStart(2, "0");
         const lunchInfo = lunchData.find(
           (item: { dayTitle: string; content: string[] }) =>
@@ -44,13 +47,17 @@ export default function LunchCard() {
       <Typography variant="h6">Öğle Yemeği</Typography>
 
       {meals.length > 0 ? (
-        <List>
-          {meals.map((meal, index) => (
-            <ListItem key={index}>{meal}</ListItem>
-          ))}
-        </List>
+        meals.map((item: string, id: number) => (
+          <Typography
+            variant="body2"
+            key={id + "meal"}
+            sx={{ cursor: "pointer", margin: "4px 0" }}
+          >
+            {item}
+          </Typography>
+        ))
       ) : (
-        <Typography variant="body2">Yemek bilgisi bulunamadı.</Typography>
+        <Loading />
       )}
     </Paper>
   );
