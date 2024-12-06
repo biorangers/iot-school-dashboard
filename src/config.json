@@ -1,94 +1,29 @@
 {
-  "name": "Name",
+  "name": "Codeaman",
   "schedule": [
-    [
-      {
-        "id": "BM301",
-        "place": "Z04",
-        "name": "Bil. Mühendisliği Giriş",
-        "time": {
-          "start": "13:30",
-          "end": "15:30"
-        }
-      }
-    ],
-    [
-      {
-        "id": "BM401",
-        "place": "Z04",
-        "name": "Veri Madenciliği",
-        "time": {
-          "start": "13:30",
-          "end": "15:30"
-        }
-      }
-    ],
-    [
-      {
-        "id": "BM402",
-        "place": "Z04",
-        "name": "Bil. Ağları",
-        "time": {
-          "start": "13:30",
-          "end": "15:30"
-        }
-      }
-    ],
-    [
-      {
-        "id": "BM403",
-        "place": "Z04",
-        "name": "Bil. Grafikleri",
-        "time": {
-          "start": "13:30",
-          "end": "15:30"
-        }
-      }
-    ],
-    [
-      {
-        "id": "BM404",
-        "place": "Z04",
-        "name": "Bil. Güvenliği",
-        "time": {
-          "start": "13:30",
-          "end": "15:30"
-        }
-      }
-    ],
-    [
-      {
-        "id": "BM405",
-        "place": "Z04",
-        "name": "Bil. Mühendisliği Proje",
-        "time": {
-          "start": "13:30",
-          "end": "15:30"
-        }
-      }
-    ],
-    [
-      {
-        "id": "BM406",
-        "place": "Z04",
-        "name": "Bil. Mühendisliği Seminer",
-        "time": {
-          "start": "13:30",
-          "end": "15:30"
-        }
-      }
-    ]
+    {
+      "day": "Salı",
+      "time": "12:30",
+      "subject": "Bilgisayar 101"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "11:30",
+      "subject": "Mat 102"
+    }
   ],
   "homeworks": [
     {
-      "id": "1",
+      "id": 0,
       "name": "Nesnelerin İnterneti",
-      "deadline": "11/11/2024"
+      "dueDate": "14 Aralık",
+      "description": "dfgdfgdfg"
     },
     {
-      "id": "2",
+      "id": 1,
       "name": "Veri Madenciliği",
-      "deadline": "02/01/2025"
+      "dueDate": "15 Aralık",
+      "description": "Mdkckfmk"
     }
   ],
   "radios": [

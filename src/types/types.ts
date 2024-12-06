@@ -1,20 +1,19 @@
 export type Schedule = {
   id: string;
-  place: string;
-  name: string;
-  time: {
-    start: string;
-    end: string;
-  };
+  day: string;
+  time: string;
+  subject: string;
 };
 
 export type Homework = {
   id: string;
   name: string;
-  deadline: string;
+  dueDate: string;
+  description: string;
 };
 
 export type Radio = {
+  id: string;
   name: string;
   url: string;
 };
@@ -22,5 +21,6 @@ export type Radio = {
 export type Config = {
   name: string;
   schedule: Schedule[];
+  homeworks: Homework[];
   radios: Radio[];
 };
