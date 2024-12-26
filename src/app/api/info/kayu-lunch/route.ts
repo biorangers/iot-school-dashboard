@@ -9,7 +9,7 @@ export async function GET() {
   });
   if (site.status !== 200) {
     // logger.log(client, "error", `Kayseri Üni. yemekhane sayfasına ulaşılamadı.`);
-    return null;
+    return NextResponse.error();
   }
   const siteText = await site.text();
   const $ = load(siteText);

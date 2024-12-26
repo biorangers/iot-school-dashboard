@@ -7,6 +7,7 @@ import {
   Slider,
   Stack,
   Skeleton,
+  useTheme,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 
@@ -98,11 +99,13 @@ export default function MusicCard({
     }
   }
 
+  const theme = useTheme();
   return (
     <Paper
       sx={{
         padding: 2,
-        backgroundColor: "#d1c4e9",
+        backgroundColor: theme.palette.cards.music.bg,
+        color: theme.palette.cards.music.text,
         borderRadius: 6,
         height: "100%",
       }}

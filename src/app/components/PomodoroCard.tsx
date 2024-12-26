@@ -19,7 +19,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Paper, Typography, Stack, Box, IconButton } from "@mui/material";
+import {
+  Paper,
+  Typography,
+  Stack,
+  Box,
+  IconButton,
+  useTheme,
+} from "@mui/material";
 import { Pause, PlayArrow, Restore } from "@mui/icons-material";
 
 export default function PomodoroCard() {
@@ -77,16 +84,18 @@ export default function PomodoroCard() {
   const circleProgress =
     (1 - timeLeft / (onBreak ? breakDuration : pomodoroDuration)) * 100;
 
+  const theme = useTheme();
   return (
     <Paper
       sx={{
         padding: 2,
-        backgroundColor: "#d1c4e9",
         borderRadius: 6,
         height: "100%",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
+        backgroundColor: theme.palette.cards.pomodoro.bg,
+        color: theme.palette.cards.pomodoro.text,
       }}
     >
       <Stack direction="row" alignItems="center" justifyContent="space-between">

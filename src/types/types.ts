@@ -18,9 +18,23 @@ export type Radio = {
   url: string;
 };
 
+export type WeatherData = {
+  name: string;
+  main: {
+    temp: number;
+  };
+  weather: {
+    id: number;
+    main: string;
+    description: string;
+  }[];
+};
+
 export type Config = {
   name: string;
   schedule: Schedule[];
   homeworks: Homework[];
   radios: Radio[];
+  city: string;
+  openweathermapApiKey: string;
 };

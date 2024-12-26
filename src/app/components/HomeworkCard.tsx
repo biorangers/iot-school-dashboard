@@ -1,4 +1,4 @@
-import { Paper, Typography } from "@mui/material";
+import { Paper, Typography, useTheme } from "@mui/material";
 
 import dayjs from "dayjs";
 import "dayjs/locale/tr";
@@ -18,11 +18,14 @@ export default function HomeworkCard({
   dayjs.extend(timezone);
   dayjs.locale("tr");
 
+  const theme = useTheme();
+
   return (
     <Paper
       sx={{
         padding: 2,
-        backgroundColor: "#ffcccb",
+        backgroundColor: theme.palette.cards.homework.bg,
+        color: theme.palette.cards.homework.text,
         borderRadius: 6,
         height: "100%",
       }}

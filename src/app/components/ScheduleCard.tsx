@@ -1,6 +1,6 @@
 "use client";
 
-import { Paper, Typography } from "@mui/material";
+import { Paper, Typography, useTheme } from "@mui/material";
 
 import dayjs from "dayjs";
 import "dayjs/locale/tr";
@@ -36,11 +36,14 @@ export default function ScheduleCard({
     return () => clearInterval(interval);
   }, [weekDay, schedule]);
 
+  const theme = useTheme();
+
   return (
     <Paper
       sx={{
         padding: 2,
-        backgroundColor: "#d1c4e9",
+        backgroundColor: theme.palette.cards.schedule.bg,
+
         borderRadius: 6,
         height: "100%",
       }}

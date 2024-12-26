@@ -24,6 +24,8 @@ export default function ConfigEditor() {
   const [homeworks, setHomeworks] = useState<Homework[]>([]);
   const [schedule, setSchedule] = useState<Schedule[]>([]);
   const [radios, setRadios] = useState<Radio[]>([]);
+  const [city, setCity] = useState<string>();
+  const [openweathermapApiKey, setOpenweathermapApiKey] = useState<string>();
 
   // Update useEffect to load from localStorage
   useEffect(() => {
@@ -34,6 +36,8 @@ export default function ConfigEditor() {
       if (savedConfig) {
         const parsed = savedConfig;
         setName(parsed.name);
+        setCity(parsed.city);
+        setOpenweathermapApiKey(parsed.openweathermapApiKey);
         setHomeworks(
           parsed.homeworks.map((item: Homework, i: number) => ({
             ...item,
@@ -77,6 +81,8 @@ export default function ConfigEditor() {
         schedule,
         homeworks,
         radios,
+        city,
+        openweathermapApiKey,
       };
 
       await fetch("/api/database", {
@@ -137,6 +143,14 @@ export default function ConfigEditor() {
         label="İsim"
         value={name}
         onChange={(e) => setName(e.target.value)}
+        sx={{ mb: 4 }}
+      />
+
+      <TextField
+        fullWidth
+        label="Şehir"
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
         sx={{ mb: 4 }}
       />
 
@@ -346,6 +360,16 @@ export default function ConfigEditor() {
           </Card>
         ))}
       </Box>
+
+      <TextField
+        fullWidth
+        //password
+        type="password"
+        label="OpenWeatherMap API Key"
+        value={openweathermapApiKey}
+        onChange={(e) => setOpenweathermapApiKey(e.target.value)}
+        sx={{ mb: 4 }}
+      />
 
       <Button variant="contained" onClick={handleSave} sx={{ mt: 2 }}>
         Kaydet
